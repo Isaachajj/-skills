@@ -4,7 +4,7 @@ import Home from './Home'
 import Login from './Login'
 import Register from './Register'
 import Myprofile from './Myprofile'
-import Slider from './Slider'
+import ImageSlider from './ImageSlider'
 import './App.css'
 
 function App() {
