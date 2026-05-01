@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  --font-family-sans: 'Poppins', sans-serif;
+  --color-navy: #1e3a8a;
+  --color-modern-blue: #0ea5e9;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #111827;
+}
+
+input {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
+}
+
+/* Selection */
+::selection {
+  background: #10B981;
+  color: var(--white);
+}

@@ -1,0 +1,427 @@
+/* Premium Booking Platform Styles for SkillHub Tanzania */
+
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-green: #10B981;
+  --golden-orange: #10B981;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --border-gray: #e0e0e0;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--light-gray);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #001D3D;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.hero-highlight {
+  color: #f39c12;
+  position: relative;
+}
+
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #f39c12;
+  border-radius: 2px;
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  color: #333333;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ================================
+   FLOATING SEARCH BAR - Pill Shaped
+   ================================ */
+.hero-search-wrapper {
+  background: var(--white);
+  border-radius: 50px;
+  padding: 6px;
+  box-shadow: var(--shadow-xl);
+  max-width: 650px;
+  margin: 0 auto;
+  animation: floatSearch 3s ease-in-out infinite;
+}
+
+@keyframes floatSearch {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-search-form {
+  width: 100%;
+}
+
+.hero-search-input-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.hero-search-icon {
+  width: 24px;
+  height: 24px;
+  color: #10B981;
+  flex-shrink: 0;
+}
+
+.hero-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-search-input::placeholder {
+  color: var(--text-light);
+}
+
+.hero-search-btn {
+  background: #f39c12;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-search-btn:hover {
+  background: #e68a0c;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(243, 156, 18, 0.4);
+}
+
+/* ================================
+   FEATURES SECTION
+   ================================ */
+.features-section {
+  padding: 6rem 3rem;
+  background: #ffffff;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.features-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.features-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-light);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* ================================
+   FEATURE CARDS with Hover Effects
+   ================================ */
+.feature-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #e8e8e8;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #10B981;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-card:nth-child(2):hover::before {
+  background: var(--golden-orange);
+}
+
+.feature-card:nth-child(3):hover::before {
+  background: #27ae60;
+}
+
+/* Card Icon Styling */
+.feature-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: var(--transition);
+}
+
+.feature-icon-wrapper.learn {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+}
+
+.feature-icon-wrapper.teach {
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(243, 156, 18, 0.2));
+}
+
+.feature-icon-wrapper.global {
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.2));
+}
+
+.feature-card:hover .feature-icon-wrapper.learn {
+  background: #10B981;
+  transform: scale(1.1);
+}
+
+.feature-card:hover .feature-icon-wrapper.teach {
+  background: var(--golden-orange);
+  transform: scale(1.1);
+}
+
+.feature-card:hover .feature-icon-wrapper.global {
+  background: #27ae60;
+  transform: scale(1.1);
+}
+
+.feature-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.feature-card:hover .feature-icon {
+  color: var(--white);
+}
+
+.feature-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.feature-card-desc {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card-link {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #10B981;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.feature-card-link:hover {
+  color: var(--golden-orange);
+  transform: translateX(4px);
+}
+
+/* ================================
+   RESPONSIVE STYLES
+   ================================ */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem;
+    letter-spacing: -0.5px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-search-wrapper {
+    border-radius: 20px;
+    padding: 4px;
+  }
+  
+  .hero-search-input-group {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .hero-search-input {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .hero-search-btn {
+    width: 100%;
+    border-radius: 16px;
+  }
+  
+  .features-section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .features-title {
+    font-size: 2rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 65vh;
+  }
+  
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .hero-search-wrapper {
+    margin: 0 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* ================================
+   ACCESSIBILITY & PREFERS
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-search-wrapper {
+    animation: none;
+  }
+  
+  .feature-card,
+  .feature-card-link,
+  .feature-icon-wrapper {
+    transition: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .features-section {
+    background: #1a1a1a;
+  }
+  
+  .feature-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+  }
+  
+  .features-title {
+    color: #e0e0e0;
+  }
+  
+  .feature-card-title {
+    color: #e0e0e0;
+  }
+}
