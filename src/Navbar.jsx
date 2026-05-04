@@ -26,6 +26,8 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
       howItWork: "How it Work",
       topExperts: "Top Experts",
       about: "About",
+      web: "Web",
+      mobile: "Mobile",
       signIn: "Sign In",
       myProfile: "My Profile",
       mySkills: "My Skills",
@@ -39,6 +41,8 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
       howItWork: "Inavyofanya",
       topExperts: "Wataalam Top",
       about: "Kuhusu",
+      web: "Wavuti",
+      mobile: "Simu",
       signIn: "Ingia",
       myProfile: "Wasifu Wangu",
       mySkills: "Ujuzi Wangu",
@@ -385,7 +389,41 @@ const dividerStyle = {
               }
             }}
           >
-            {t.explore}
+{t.explore}
+          </a>
+          <a href="#" style={navLinkStyle(activeLink === 'Web')}
+            onClick={() => handleNavClick('Web')}
+            onMouseEnter={(e) => {
+              if (activeLink !== 'Web') {
+                e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)';
+                e.currentTarget.style.color = colors.cyan;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeLink !== 'Web') {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.color = colors.textLight;
+              }
+            }}
+          >
+            {t.web || 'Web'}
+          </a>
+          <a href="#" style={navLinkStyle(activeLink === 'Mobile')}
+            onClick={() => handleNavClick('Mobile')}
+            onMouseEnter={(e) => {
+              if (activeLink !== 'Mobile') {
+                e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)';
+                e.currentTarget.style.color = colors.cyan;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeLink !== 'Mobile') {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.color = colors.textLight;
+              }
+            }}
+          >
+            {t.mobile || 'Mobile'}
           </a>
           <a href="#" style={navLinkStyle(activeLink === 'How it Work')}
             onClick={() => handleNavClick('How it Work')}
