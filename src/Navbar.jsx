@@ -4,7 +4,7 @@ function Navbar({ onNavigate, onLoginClick, onRegisterClick }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState('EN');
   const [activeLink, setActiveLink] = useState('');
-const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -18,7 +18,7 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-// Translation content
+  // Translation content
   const translations = {
     EN: {
       searchPlaceholder: "Search skills, courses, or locations...",
@@ -26,8 +26,6 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
       howItWork: "How it Work",
       topExperts: "Top Experts",
       about: "About",
-      web: "Web",
-      mobile: "Mobile",
       signIn: "Sign In",
       myProfile: "My Profile",
       mySkills: "My Skills",
@@ -41,8 +39,6 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
       howItWork: "Inavyofanya",
       topExperts: "Wataalam Top",
       about: "Kuhusu",
-      web: "Wavuti",
-      mobile: "Simu",
       signIn: "Ingia",
       myProfile: "Wasifu Wangu",
       mySkills: "Ujuzi Wangu",
@@ -62,22 +58,22 @@ const [isProfileOpen, setIsProfileOpen] = useState(false);
     setLanguage(language === 'EN' ? 'SW' : 'EN');
   };
 
-const colors = {
-    darkBg: '#ffffff',
-    darkBgMid: '#f8f9fa',
-    darkBgLight: '#f1f5f9',
-    cyan: '#0ea5e9',
-    cyanDark: '#0284c7',
-    blue: '#3b82f6',
-    blueDark: '#1d4ed8',
-    lightGrey: '#f4f7f9',
-    border: '#e2e8f0',
-    textLight: '#1e3a8a',
-    textDark: '#64748b',
-    glassBg: 'rgba(255, 255, 255, 0.95)'
+  const colors = {
+    accent: '#22d3ee',
+    accentHover: '#06b6d4',
+    darkBg: '#111827',
+    darkBgMid: '#1e293b',
+    darkBgLight: '#374151',
+    textMain: '#e2e8f0',
+    textMuted: '#94a3b8',
+    glassBg: 'rgba(17, 24, 39, 0.9)',
+    border: '#334155',
+    inputBg: '#1e293b',
+    textLight: '#f8fafc',
+    cyan: '#22d3ee'
   };
 
-const handleNavClick = (link) => {
+  const handleNavClick = (link) => {
     setActiveLink(link);
     if (onNavigate) {
       onNavigate(link.toLowerCase().replace(' ', '-'));
@@ -88,16 +84,16 @@ const handleNavClick = (link) => {
     setLanguage(language === 'EN' ? 'SW' : 'EN');
   };
 
-const navbarStyle = {
+  const navbarStyle = {
     position: 'sticky',
     top: 0,
     zIndex: 1000,
     background: colors.glassBg,
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid rgba(14, 165, 233, 0.15)',
+    borderBottom: '1px solid rgba(34, 211, 238, 0.15)',
     fontFamily: "'Poppins', sans-serif",
-    backgroundImage: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%)',
+    backgroundImage: 'linear-gradient(135deg, #111827 0%, #1e293b 50%, #111827 100%)',
     backgroundSize: '200% 200%'
   };
 
@@ -121,7 +117,7 @@ const navbarStyle = {
     flexShrink: 0
   };
 
-const logoIconStyle = {
+  const logoIconStyle = {
     width: '40px',
     height: '40px',
     borderRadius: '10px',
@@ -138,51 +134,31 @@ const logoIconStyle = {
     flexDirection: 'column'
   };
 
-  const skillTextStyle = {
+  const logoMainTextStyle = {
     fontSize: '20px',
     fontWeight: '700',
-    color: colors.textLight,
+    color: 'white',
     letterSpacing: '-0.5px',
     lineHeight: '1.1'
   };
 
-  const hubTextStyle = {
-    fontSize: '20px',
-    fontWeight: '700',
-    color: colors.cyan
-  };
-
   const logoSubtextStyle = {
     fontSize: '10px',
-    color: colors.textDark,
+    color: colors.textMuted,
     fontWeight: '500',
     letterSpacing: '1px'
   };
 
   // MIDDLE: Search Bar
-const searchContainerStyle = {
+  const searchContainerStyle = {
     flex: '1',
     maxWidth: '500px',
     display: 'flex',
     alignItems: 'center',
-    background: colors.darkBgMid,
+    background: colors.inputBg,
     borderRadius: '8px',
-    border: '1px solid rgba(14, 165, 233, 0.2)',
+    border: '1px solid ' + colors.border,
     overflow: 'hidden'
-  };
-
-const categorySelectStyle = {
-    background: 'transparent',
-    border: 'none',
-    borderRight: '1px solid rgba(14, 165, 233, 0.2)',
-    padding: '10px 12px',
-    fontSize: '12px',
-    color: colors.textDark,
-    cursor: 'pointer',
-    outline: 'none',
-    height: '40px',
-    display: 'flex',
-    alignItems: 'center'
   };
 
   const searchInputStyle = {
@@ -192,10 +168,10 @@ const categorySelectStyle = {
     fontSize: '14px',
     outline: 'none',
     background: 'transparent',
-    color: colors.textLight
+    color: colors.textMain
   };
 
-const searchBtnStyle = {
+  const searchBtnStyle = {
     background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
     border: 'none',
     padding: '10px 16px',
@@ -219,7 +195,7 @@ const searchBtnStyle = {
     padding: '8px 14px',
     fontSize: '13px',
     fontWeight: '500',
-    color: isActive ? colors.cyan : colors.textLight,
+    color: isActive ? colors.cyan : colors.textMain,
     textDecoration: 'none',
     cursor: 'pointer',
     borderRadius: '6px',
@@ -239,7 +215,7 @@ const searchBtnStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: colors.textLight,
+    color: colors.textMain,
     position: 'relative'
   };
 
@@ -254,7 +230,7 @@ const searchBtnStyle = {
     border: '2px solid ' + colors.darkBg
   };
 
-const signInBtnStyle = {
+  const signInBtnStyle = {
     background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)',
     border: 'none',
     padding: '8px 20px',
@@ -267,7 +243,7 @@ const signInBtnStyle = {
     boxShadow: '0 2px 8px rgba(14, 165, 233, 0.3)'
   };
 
-const dividerStyle = {
+  const dividerStyle = {
     width: '1px',
     height: '24px',
     background: 'rgba(14, 165, 233, 0.3)',
@@ -283,7 +259,7 @@ const dividerStyle = {
     width: '200px',
     background: colors.darkBgMid,
     borderRadius: '8px',
-    border: '1px solid rgba(14, 165, 233, 0.2)',
+    border: '1px solid rgba(34, 211, 238, 0.2)',
     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
     overflow: 'hidden',
     zIndex: 1001,
@@ -299,10 +275,10 @@ const dividerStyle = {
     gap: '12px',
     padding: '12px 16px',
     fontSize: '14px',
-    color: colors.textLight,
+    color: colors.textMain,
     cursor: 'pointer',
     transition: 'all 0.2s ease',
-    borderBottom: '1px solid rgba(14, 165, 233, 0.1)'
+    borderBottom: '1px solid rgba(34, 211, 238, 0.1)'
   };
 
   const dropdownIconStyle = {
@@ -318,31 +294,19 @@ const dividerStyle = {
       <div style={containerStyle}>
         {/* LEFT: Logo */}
         <a href="#" style={logoContainerStyle}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.02)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
+           onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+           onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
           <div style={logoIconStyle}>🎓</div>
           <div style={logoTextStyle}>
-            <span style={logoTextStyle}>
-              <span style={skillTextStyle}>Skill</span>
-              <span style={hubTextStyle}>Hub</span>
-            </span>
-            <span style={logoSubtextStyle}>.tz</span>
+            <span style={logoMainTextStyle}>SkillsFuture</span>
+            <span style={logoSubtextStyle}>.TZ</span>
           </div>
         </a>
 
         {/* MIDDLE: Search Bar */}
         <div style={searchContainerStyle}>
-          <select style={categorySelectStyle}>
-            <option>Skills</option>
-            <option>Location</option>
-            <option>Experts</option>
-          </select>
-<input
+          <input
             type="text"
             placeholder={t.searchPlaceholder}
             style={searchInputStyle}
@@ -351,7 +315,7 @@ const dividerStyle = {
               e.target.parentElement.style.boxShadow = '0 0 8px rgba(14, 165, 233, 0.2)';
             }}
             onBlur={(e) => {
-              e.target.parentElement.style.borderColor = 'rgba(14, 165, 233, 0.2)';
+              e.target.parentElement.style.borderColor = colors.border;
               e.target.parentElement.style.boxShadow = 'none';
             }}
           />
@@ -373,7 +337,7 @@ const dividerStyle = {
 
         {/* RIGHT: Links + Icons */}
         <div style={rightSectionStyle}>
-{/* Navigation Links */}
+          {/* Navigation Links - Web and Mobile removed */}
           <a href="#" style={navLinkStyle(activeLink === 'Explore')}
             onClick={() => handleNavClick('Explore')}
             onMouseEnter={(e) => {
@@ -385,45 +349,11 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               if (activeLink !== 'Explore') {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
+                e.currentTarget.style.color = colors.textMain;
               }
             }}
           >
-{t.explore}
-          </a>
-          <a href="#" style={navLinkStyle(activeLink === 'Web')}
-            onClick={() => handleNavClick('Web')}
-            onMouseEnter={(e) => {
-              if (activeLink !== 'Web') {
-                e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)';
-                e.currentTarget.style.color = colors.cyan;
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (activeLink !== 'Web') {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
-              }
-            }}
-          >
-            {t.web || 'Web'}
-          </a>
-          <a href="#" style={navLinkStyle(activeLink === 'Mobile')}
-            onClick={() => handleNavClick('Mobile')}
-            onMouseEnter={(e) => {
-              if (activeLink !== 'Mobile') {
-                e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)';
-                e.currentTarget.style.color = colors.cyan;
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (activeLink !== 'Mobile') {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
-              }
-            }}
-          >
-            {t.mobile || 'Mobile'}
+            {t.explore}
           </a>
           <a href="#" style={navLinkStyle(activeLink === 'How it Work')}
             onClick={() => handleNavClick('How it Work')}
@@ -436,7 +366,7 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               if (activeLink !== 'How it Work') {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
+                e.currentTarget.style.color = colors.textMain;
               }
             }}
           >
@@ -453,7 +383,7 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               if (activeLink !== 'Top Experts') {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
+                e.currentTarget.style.color = colors.textMain;
               }
             }}
           >
@@ -470,7 +400,7 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               if (activeLink !== 'About') {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = colors.textLight;
+                e.currentTarget.style.color = colors.textMain;
               }
             }}
           >
@@ -480,7 +410,7 @@ const dividerStyle = {
           {/* Divider */}
           <div style={dividerStyle}></div>
 
-{/* Language Toggle */}
+          {/* Language Toggle */}
           <button style={iconButtonStyle}
             onClick={handleLanguageToggle}
             title={language === 'EN' ? 'Switch to Swahili' : 'Switch to English'}
@@ -492,7 +422,7 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.color = colors.textLight;
+              e.currentTarget.style.color = colors.textMain;
             }}
           >
             🌐
@@ -509,14 +439,14 @@ const dividerStyle = {
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.color = colors.textLight;
+              e.currentTarget.style.color = colors.textMain;
             }}
           >
             🔔
             <span style={notificationBadge}></span>
           </button>
 
-{/* Profile Dropdown */}
+          {/* Profile Dropdown */}
           <div style={{ position: 'relative' }} ref={profileRef}>
             <button style={iconButtonStyle}
               onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -528,7 +458,7 @@ const dividerStyle = {
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'transparent';
                 e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.color = colors.textLight;
+                e.currentTarget.style.color = colors.textMain;
               }}
             >
               👤
@@ -536,7 +466,7 @@ const dividerStyle = {
             
             {/* Dropdown Menu */}
             <div style={profileDropdownStyle}>
-<div 
+              <div 
                 style={dropdownItemStyle}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'rgba(14, 165, 233, 0.15)';
@@ -544,7 +474,7 @@ const dividerStyle = {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = colors.textLight;
+                  e.currentTarget.style.color = colors.textMain;
                 }}
                 onClick={() => {
                   if (onNavigate) {
@@ -564,7 +494,27 @@ const dividerStyle = {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = colors.textLight;
+                  e.currentTarget.style.color = colors.textMain;
+                }}
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('account');
+                  }
+                  setIsProfileOpen(false);
+                }}
+              >
+                <span style={dropdownIconStyle}>📊</span>
+                Account
+              </div>
+              <div 
+                style={dropdownItemStyle}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(14, 165, 233, 0.15)';
+                  e.currentTarget.style.color = colors.cyan;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = colors.textMain;
                 }}
                 onClick={() => {
                   console.log('My Skills');
@@ -582,7 +532,7 @@ const dividerStyle = {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = colors.textLight;
+                  e.currentTarget.style.color = colors.textMain;
                 }}
                 onClick={() => {
                   console.log('Booking');
@@ -600,7 +550,7 @@ const dividerStyle = {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = colors.textLight;
+                  e.currentTarget.style.color = colors.textMain;
                 }}
                 onClick={() => {
                   console.log('Settings');
@@ -631,11 +581,11 @@ const dividerStyle = {
             </div>
           </div>
 
-{/* Sign In Button */}
+          {/* Sign In Button */}
           <button style={signInBtnStyle}
             onClick={onLoginClick}
             onMouseEnter={(e) => {
-              e.target.style.background = 'linear-gradient(135deg, #0284c7 0%, #075984 100%)';
+              e.target.style.background = 'linear-gradient(135deg, #0284c7 0%, #075985 100%)';
               e.target.style.boxShadow = '0 4px 15px rgba(14, 165, 233, 0.5)';
               e.target.style.transform = 'translateY(-2px)';
             }}
@@ -654,3 +604,4 @@ const dividerStyle = {
 }
 
 export default Navbar;
+

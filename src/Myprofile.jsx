@@ -8,12 +8,11 @@ function Myprofile({ onLoginClick }) {
     fullName: '',
     email: '',
     phone: '',
-    university: '',
-    course: '',
     coreSkill: '',
     expertiseLevel: '',
     bio: '',
-    passport: '',
+    profilePhoto: null,
+    workSample: null,
     portfolioLink: ''
   });
 
@@ -23,7 +22,11 @@ function Myprofile({ onLoginClick }) {
     if (savedData) {
       const parsed = JSON.parse(savedData);
       setUserData(parsed);
-      setFormData(parsed);
+      setFormData({
+        ...parsed,
+        profilePhoto: parsed.profilePhoto || parsed.passport || null,
+        workSample: parsed.workSample || null
+      });
     }
   }, []);
 
@@ -35,9 +38,43 @@ function Myprofile({ onLoginClick }) {
     }));
   };
 
-  const handleSave = () => {
-    localStorage.setItem('skillhubUser', JSON.stringify(formData));
-    setUserData(formData);
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: files[0] || null
+    }));
+  };
+
+  const handleSave = async () => {
+    const updatedData = { ...formData };
+
+    // Handle profile photo
+    if (formData.profilePhoto instanceof File) {
+      await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          updatedData.profilePhoto = reader.result;
+          resolve();
+        };
+        reader.readAsDataURL(formData.profilePhoto);
+      });
+    }
+
+    // Handle work sample
+    if (formData.workSample instanceof File) {
+      await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          updatedData.workSample = reader.result;
+          resolve();
+        };
+        reader.readAsDataURL(formData.workSample);
+      });
+    }
+
+    localStorage.setItem('skillhubUser', JSON.stringify(updatedData));
+    setUserData(updatedData);
     setIsEditing(false);
   };
 
@@ -52,7 +89,9 @@ function Myprofile({ onLoginClick }) {
 
   const getSkillLabel = (value) => skills[value] || value;
 
-  if (!userData) {
+  const profileImage = userData?.profilePhoto || userData?.passport;
+
+  if (!userData || (!userData.fullName && !profileImage)) {
     return (
       <div className="register-container">
         <div className="register-left">
@@ -110,7 +149,6 @@ function Myprofile({ onLoginClick }) {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
               </div>
@@ -150,25 +188,55 @@ function Myprofile({ onLoginClick }) {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="university">University</label>
-                  <input
-                    type="text"
-                    id="university"
-                    name="university"
-                    value={formData.university}
+                  <label htmlFor="expertiseLevel">Expertise Level</label>
+                  <select
+                    id="expertiseLevel"
+                    name="expertiseLevel"
+                    value={formData.expertiseLevel}
                     onChange={handleInputChange}
-                  />
+                  >
+                    <option value="">Select level</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                    <option value="expert">Expert</option>
+                  </select>
                 </div>
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="course">Course/Field of Study</label>
+              <div className="form-group">
+                <label htmlFor="profilePhoto">Profile Photo</label>
+                <div className="passport-upload-area">
                   <input
-                    type="text"
-                    id="course"
-                    name="course"
-                    value={formData.course}
-                    onChange={handleInputChange}
+                    type="file"
+                    id="profilePhoto"
+                    name="profilePhoto"
+                    accept="image/jpeg,image/png"
+                    onChange={handleFileChange}
                   />
+                  {formData.profilePhoto ? (
+                    <img src={URL.createObjectURL(formData.profilePhoto)} alt="Preview" className="passport-preview" />
+                  ) : profileImage ? (
+                    <img src={profileImage} alt="Current" className="passport-preview" />
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="workSample">Work Sample</label>
+                <div className="passport-upload-area">
+                  <input
+                    type="file"
+                    id="workSample"
+                    name="workSample"
+                    accept="image/jpeg,image/png"
+                    onChange={handleFileChange}
+                  />
+                  {formData.workSample ? (
+                    <img src={URL.createObjectURL(formData.workSample)} alt="Preview" className="passport-preview" />
+                  ) : userData?.workSample ? (
+                    <img src={userData.workSample} alt="Current" className="passport-preview" />
+                  ) : null}
                 </div>
               </div>
 
@@ -215,7 +283,7 @@ function Myprofile({ onLoginClick }) {
 
                 <div className="form-group">
                   <label>Email</label>
-                  <p style={{ color: '#e2e8f0', fontSize: '0.95rem' }}>{userData.email}</p>
+                  <p style={{ color: '#e2e8f0', fontSize: '0.95rem' }}>{userData.email || '-'}</p>
                 </div>
               </div>
 
@@ -228,18 +296,6 @@ function Myprofile({ onLoginClick }) {
                 <div className="form-group">
                   <label>Main Skill</label>
                   <p style={{ color: '#e2e8f0', fontSize: '0.95rem' }}>{getSkillLabel(userData.coreSkill)}</p>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>University</label>
-                  <p style={{ color: '#e2e8f0', fontSize: '0.95rem' }}>{userData.university || '-'}</p>
-                </div>
-
-                <div className="form-group">
-                  <label>Course/Field</label>
-                  <p style={{ color: '#e2e8f0', fontSize: '0.95rem' }}>{userData.course || '-'}</p>
                 </div>
               </div>
 
@@ -273,7 +329,11 @@ function Myprofile({ onLoginClick }) {
                 type="button" 
                 className="submit-btn"
                 onClick={() => {
-                  setFormData(userData);
+                  setFormData({
+                    ...userData,
+                    profilePhoto: userData.profilePhoto || userData.passport || null,
+                    workSample: userData.workSample || null
+                  });
                   setIsEditing(true);
                 }}
               >
@@ -289,10 +349,10 @@ function Myprofile({ onLoginClick }) {
           <h1>My Profile</h1>
           <p>View and manage your expert profile.</p>
           
-          {userData.passport ? (
-            <div className="passport-upload-section" style={{ animation: 'fadeInUp 0.6s ease-out 0.4s both' }}>
+          {profileImage ? (
+            <div className="passport-upload-section">
               <img 
-                src={userData.passport} 
+                src={profileImage} 
                 alt="Profile" 
                 className="passport-preview-large" 
               />
@@ -300,14 +360,14 @@ function Myprofile({ onLoginClick }) {
           ) : (
             <div className="passport-upload-section" style={{ borderColor: 'rgba(255,255,255,0.2)' }}>
               <svg className="passport-icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               </svg>
               <span className="passport-text">No Photo Uploaded</span>
             </div>
           )}
 
-          {userData.coreSkill && (
+          {userData?.coreSkill && (
             <div style={{ 
               marginTop: '20px', 
               padding: '12px 20px', 
@@ -327,3 +387,4 @@ function Myprofile({ onLoginClick }) {
 }
 
 export default Myprofile;
+

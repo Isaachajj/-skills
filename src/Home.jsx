@@ -46,6 +46,18 @@ function Home({ onNavigate }) {
       onNavigate('cyber');
     } else if (title === 'Data Science & Analytics') {
       onNavigate('datascience');
+    } else if (title === 'Artificial Intelligence (AI)') {
+      onNavigate('artificialintelligence');
+    } else if (title === 'Advanced Forex Trading') {
+      onNavigate('forex');
+    } else if (title === 'Digital Marketing Strategy') {
+      onNavigate('marketing');
+    } else if (title === 'Big Data Engineering') {
+      onNavigate('dataengin');
+    } else if (title === 'Game Development (Unity)') {
+      onNavigate('game');
+    } else if (title === 'Advanced Academic English') {
+      onNavigate('education');
     }
   };
 
