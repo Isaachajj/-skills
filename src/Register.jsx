@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './Register.css';
 
-function Register({ onLoginClick }) {
+function Register({ onLoginClick, onNavigate }) {
   const [formData, setFormData] = useState({
     fullName: '',
     profilePhoto: null
   });
-
 
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -29,17 +28,14 @@ function Register({ onLoginClick }) {
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
     if (!formData.profilePhoto) newErrors.profilePhoto = 'Profile photo is required';
-
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
@@ -47,7 +43,12 @@ function Register({ onLoginClick }) {
       console.log('Register submitted:', formData);
       
       const userData = {
-        fullName: formData.fullName
+        id: Date.now(),
+        fullName: formData.fullName,
+        email: formData.email || '',
+        phone: formData.phone || '',
+        createdAt: new Date().toISOString(),
+        profilePhoto: null
       };
 
       // Handle profile photo
@@ -62,9 +63,20 @@ function Register({ onLoginClick }) {
         });
       }
 
+      // Save to localStorage
       localStorage.setItem('skillhubUser', JSON.stringify(userData));
       setSaving(false);
-      window.parent.postMessage({ type: 'navigate', page: 'account' }, '*');
+      
+      console.log('User saved, navigating to account1...');
+      
+      // Navigate to Account1 after successful registration
+      if (onNavigate) {
+        onNavigate('account1');
+      } else {
+        console.error('onNavigate is not defined!');
+        // Fallback: try to use window.postMessage
+        window.parent.postMessage({ type: 'navigate', page: 'account1' }, '*');
+      }
     }
   };
 
@@ -72,7 +84,7 @@ function Register({ onLoginClick }) {
     <div className="register-container">
       <div className="register-left">
         <form className="register-form" onSubmit={handleSubmit}>
-<h2>Register</h2>
+          <h2>Register</h2>
 
           <div className="form-row">
             <div className="form-group">
@@ -107,8 +119,9 @@ function Register({ onLoginClick }) {
                 ) : (
                   <>
                     <svg className="passport-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="7" r="4"></circle>
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 8v8"></path>
+                      <path d="M8 12h8"></path>
                     </svg>
                     <p>Upload Profile Photo</p>
                     <small>JPG, PNG up to 5MB</small>
@@ -121,11 +134,26 @@ function Register({ onLoginClick }) {
           <button type="submit" disabled={saving} className="submit-btn">
             {saving ? 'Saving...' : 'Register'}
           </button>
+          
+          <div className="login-redirect">
+            <a href="#" onClick={(e) => {
+              e.preventDefault();
+              if (onLoginClick) onLoginClick();
+            }}>
+              Already have an account? Login
+            </a>
+          </div>
         </form>
+      </div>
+      
+      <div className="register-right">
+        <div className="welcome-content">
+          <h1>Welcome to SkillsFuture</h1>
+          <p>Create your account and start your learning journey today!</p>
+        </div>
       </div>
     </div>
   );
 }
 
 export default Register;
-
