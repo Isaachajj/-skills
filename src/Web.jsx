@@ -378,9 +378,9 @@ const styles = `
     letter-spacing: 0.04em;
   }
 
-  .image-wrap {
+.image-wrap {
     position: relative;
-    height: 210px;
+    height: 150px;
     overflow: hidden;
     border-radius: 24px 24px 0 0;
   }

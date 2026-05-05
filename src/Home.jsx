@@ -119,7 +119,7 @@ function Home({ onNavigate }) {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              <div style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ height: '140px', position: 'relative', overflow: 'hidden' }}>
                 <img 
                   src={cat.image} 
                   alt={cat.title} 
@@ -137,7 +137,7 @@ function Home({ onNavigate }) {
                   bottom: 0,
                   left: 0,
                   width: '100%',
-                  height: '50%',
+                  height: '40%',
                   background: 'linear-gradient(to top, rgba(2, 6, 23, 0.8), transparent)'
                 }}></div>
                 
@@ -151,8 +151,8 @@ function Home({ onNavigate }) {
                 </div>
               </div>
 
-              <div style={{ padding: '24px' }}>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '10px', lineHeight: '1.4' }}>{cat.title}</h3>
+              <div style={{ padding: '20px' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '10px', lineHeight: '1.4' }}>{cat.title}</h3>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '15px' }}>
                   <span style={{ color: colors.textMuted, fontSize: '0.9rem' }}>{cat.experts}</span>
                   <div style={{ 

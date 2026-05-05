@@ -124,9 +124,9 @@ function Datascience({ onNavigate }) {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
               e.currentTarget.style.boxShadow = 'none';
             }}>
-              <div style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ height: '140px', position: 'relative', overflow: 'hidden' }}>
                 <img src={data.image} alt={data.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50%', background: 'linear-gradient(to top, rgba(2, 6, 23, 0.8), transparent)' }} />
+                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%', background: 'linear-gradient(to top, rgba(2, 6, 23, 0.8), transparent)' }} />
                 <div style={{ position: 'absolute', top: '15px', right: '15px', backgroundColor: 'rgba(0,0,0,0.8)', padding: '5px 12px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: '800', color: 'white' }}>
                   {data.category}
                 </div>
@@ -134,7 +134,7 @@ function Datascience({ onNavigate }) {
                   <PlayIcon />
                 </div>
               </div>
-              <div style={{ padding: '24px' }}>
+              <div style={{ padding: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <div style={{ fontSize: '0.85rem', color: colors.textMuted }}> {data.duration} • {data.lessons} lessons </div>
                   <div style={{ display: 'flex', gap: '2px' }}>
@@ -142,7 +142,7 @@ function Datascience({ onNavigate }) {
                     <span style={{ fontSize: '0.85rem', color: '#f5c518' }}>{data.rating}</span>
                   </div>
                 </div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '16px', lineHeight: '1.4' }}>{data.title}</h3>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '16px', lineHeight: '1.4' }}>{data.title}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: colors.textMuted }}>
                   <img src={data.instructor.avatar} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
                   <span>{data.instructor.name}</span>
